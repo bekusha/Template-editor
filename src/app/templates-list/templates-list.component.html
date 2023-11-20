@@ -1,0 +1,8 @@
+<button mat-raised-button color="primary" (click)="addNewTemplate()">Add New Template</button>
+
+<div *ngFor="let template of templates">
+  <p>{{ template.name }}</p>
+  <button mat-raised-button color="accent" (click)="editTemplate(template._id)">Edit</button>
+  <button mat-raised-button color="warn" (click)="deleteTemplate(template._id)">Delete</button>
+  <button mat-raised-button (click)="viewTemplate(template._id)">View</button>
+</div>

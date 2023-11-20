@@ -1,0 +1,8 @@
+<h2>Add New Template</h2>
+
+<div>
+    <label for="jsonData">JsonData: </label>
+    <textarea placeholder="Insert Json object with name and content keys" id="jsonData" [(ngModel)]="jsonData" name="jsonData" rows="5" cols="40"></textarea>
+</div>
+<button mat-raised-button color="primary" (click)="saveTemplate()">Save</button>
+<button mat-raised-button color="warn" (click)="closeDialog()">Cancel</button>

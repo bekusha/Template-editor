@@ -1,0 +1,9 @@
+<div *ngFor="let template of templates">
+  <!-- <h2>{{ template.name }}</h2>
+  <h2>{{ template.content }}</h2> -->
+
+  <div [innerHTML]="renderTemplate(template.id || '')"></div>
+</div>
+    <!-- <button (click)="editTemplate(template)">Edit</button>
+    <button (click)="deleteTemplate(template)">Delete</button> -->
+  

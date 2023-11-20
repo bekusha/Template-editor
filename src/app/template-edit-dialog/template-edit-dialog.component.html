@@ -1,0 +1,9 @@
+<h2>Edit Template</h2>
+    <mat-form-field>
+      <input matInput placeholder="Name" [(ngModel)]="editedTemplate.name" />
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Content" [(ngModel)]="editedTemplate.content"></textarea>
+    </mat-form-field>
+    <button mat-button (click)="onSave()">Save</button>
+    <button mat-button mat-dialog-close>Cancel</button>
