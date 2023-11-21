@@ -1,0 +1,31 @@
+mat-card {
+  /* background-color: gray; */
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  margin: 20px 40px;
+  width: 300px;
+  /* background-color: rgb(198, 199, 218); */
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.addTemplateButton {
+  margin: 15px;
+}
+input {
+  height: 30px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.buttonsGroup {
+  display: flex;
+  gap: 10px;
+}

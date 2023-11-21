@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 
-import { TemplateManagementComponent } from './template-management/template-management.component';
+// import { TemplateManagementComponent } from './template-management/template-management.component';
 import { TemplatesListComponent } from './templates-list/templates-list.component';
 import { HandlebarsTemplateDetailComponent } from './handlebars-template-detail/handlebars-template-detail.component';
 

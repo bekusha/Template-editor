@@ -4,6 +4,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { TemplateService } from '../template.service';
 import { Template } from '../model/template.model';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { HandlebarsService } from '../handlebars.service';
 
 @Component({
   selector: 'app-template-dialog',
@@ -12,6 +14,9 @@ import { Template } from '../model/template.model';
 })
 export class TemplateDialogComponent {
   jsonData:any ;
+  safeHtmlData: SafeHtml;
+
+
   constructor(
     public dialogRef: MatDialogRef<TemplateDialogComponent>,
     private templateService: TemplateService 
@@ -19,7 +24,7 @@ export class TemplateDialogComponent {
  
  
   saveTemplate() {
-    const templateData = JSON.parse(this.jsonData); // Parse JSON data if needed
+    const templateData = JSON.parse(this.jsonData); 
     const { name, content } = templateData;
   
     const template: Template = {

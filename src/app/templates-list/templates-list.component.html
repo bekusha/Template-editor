@@ -1,8 +1,19 @@
-<button mat-raised-button color="primary" (click)="addNewTemplate()">Add New Template</button>
+<!-- templates-list.component.html -->
+<mat-toolbar color="primary">
+  <button class="addTemplateButton" mat-raised-button (click)="addNewTemplate()">Add New Template</button>
+  <input type="text" placeholder="Search templates" [(ngModel)]="searchTerm" />
+   <button mat-raised-button  (click)="searchTemplates()">Search</button>
+</mat-toolbar>
 
-<div *ngFor="let template of templates">
-  <p>{{ template.name }}</p>
-  <button mat-raised-button color="accent" (click)="editTemplate(template._id)">Edit</button>
-  <button mat-raised-button color="warn" (click)="deleteTemplate(template._id)">Delete</button>
-  <button mat-raised-button (click)="viewTemplate(template._id)">View</button>
+<div class="container">
+  <div *ngFor="let template of templates">
+    <mat-card class="list" *ngIf="filteredTemplates.includes(template)">
+      <h2>{{ template.name }}</h2>
+      <div class="buttonsGroup">
+        <button mat-raised-button color="primary" (click)="editTemplate(template._id)">Edit</button>
+        <button mat-raised-button color="warn" (click)="deleteTemplate(template._id)">Delete</button>
+        <button mat-raised-button (click)="viewTemplate(template._id)">View</button>
+      </div>
+    </mat-card>
+  </div>
 </div>

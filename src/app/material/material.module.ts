@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import {MatCardModule} from '@angular/material/card';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 const MaterialComponents = [
   MatInputModule,
@@ -13,7 +15,9 @@ const MaterialComponents = [
   MatButtonModule,
   ReactiveFormsModule,
   MatDialogModule,
-  FormsModule
+  FormsModule,
+  MatCardModule,
+  MatToolbarModule
 ]
 
 @NgModule({
