@@ -8,6 +8,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 const MaterialComponents = [
   MatInputModule,
@@ -17,7 +19,8 @@ const MaterialComponents = [
   MatDialogModule,
   FormsModule,
   MatCardModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatProgressSpinnerModule
 ]
 
 @NgModule({

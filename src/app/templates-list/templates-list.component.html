@@ -7,7 +7,7 @@
 
 <div class="container">
   <div *ngFor="let template of templates">
-    <mat-card class="list" *ngIf="filteredTemplates.includes(template)">
+   <mat-card class="list" *ngIf="filteredTemplates.includes(template)">
       <h2>{{ template.name }}</h2>
       <div class="buttonsGroup">
         <button mat-raised-button color="primary" (click)="editTemplate(template._id)">Edit</button>

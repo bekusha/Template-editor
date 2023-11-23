@@ -1,5 +1,4 @@
 mat-card {
-  /* background-color: gray; */
   margin-top: 10px;
   display: flex;
   justify-content: center;
@@ -7,7 +6,6 @@ mat-card {
   height: 100px;
   margin: 20px 40px;
   width: 300px;
-  /* background-color: rgb(198, 199, 218); */
 }
 
 .container {

@@ -1,6 +1,11 @@
 .container {
-  padding: 20px;
+  padding: 40px;
 }
 textarea::placeholder {
   font-size: 10px;
+}
+
+.buttonsGroup {
+  display: flex;
+  gap: 10px;
 }

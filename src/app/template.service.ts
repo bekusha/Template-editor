@@ -12,7 +12,8 @@ export interface TemplateResponse {
   providedIn: 'root',
 })
 export class TemplateService {
-  private apiUrl = 'http://localhost:3000/template'; 
+  private apiUrl = 'https://testdeploy-w52b.onrender.com/templates'; 
+  // private apiUrl = 'http://localhost:3000/templates'; 
 
   constructor(private http: HttpClient) {}
 
