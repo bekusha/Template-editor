@@ -1,5 +1,6 @@
 .container {
   padding: 40px;
+  background-color: rgb(234, 234, 234);
 }
 textarea::placeholder {
   font-size: 10px;

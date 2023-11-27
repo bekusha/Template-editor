@@ -10,7 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TemplatesListComponent } from './templates-list/templates-list.component';
 import { HandlebarsTemplateDetailComponent } from './handlebars-template-detail/handlebars-template-detail.component';
 import { TemplateDialogComponent } from './template-dialog/template-dialog.component';
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -33,7 +33,7 @@ import { TemplateDialogComponent } from './template-dialog/template-dialog.compo
     MaterialModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -27,3 +27,11 @@ input {
   display: flex;
   gap: 10px;
 }
+.list {
+  background-color: rgb(234, 234, 234);
+}
+
+.c {
+  height: 100%;
+  background-color: rgb(234, 234, 234);
+}

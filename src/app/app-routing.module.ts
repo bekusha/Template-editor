@@ -7,7 +7,7 @@ import { HandlebarsTemplateDetailComponent } from './handlebars-template-detail/
 const routes: Routes = [
   { path: 'templates', component: TemplatesListComponent },
   { path: 'templates/:id', component: HandlebarsTemplateDetailComponent },
-  { path: '', redirectTo: '/templates', pathMatch: 'full' },
+  
 ];
 
 @NgModule({
