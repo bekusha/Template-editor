@@ -6,7 +6,7 @@ import { HandlebarsTemplateDetailComponent } from './handlebars-template-detail/
 
 const routes: Routes = [
   { path: '', component: TemplatesListComponent },
-  { path: ':id', component: HandlebarsTemplateDetailComponent },
+  { path: 'templates/:id', component: HandlebarsTemplateDetailComponent },
   
 ];
 
