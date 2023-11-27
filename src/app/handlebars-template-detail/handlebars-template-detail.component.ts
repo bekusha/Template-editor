@@ -29,7 +29,6 @@ export class HandlebarsTemplateDetailComponent implements OnInit {
 
   loadTemplate() {
     this.templateService.findOne(this.templateId).subscribe((template) => {
-      console.log('handlebarsTemplate:',template)
       const templateSource = template; 
       const compiledHtml = Handlebars.compile(templateSource)({});
       this.compiledHtml = this.sanitizer.bypassSecurityTrustHtml(compiledHtml);

@@ -65,7 +65,7 @@ export class TemplatesListComponent implements OnInit {
   }
 
   viewTemplate(id: string) {
-    this.router.navigate(['/templates', id]);
+    this.router.navigate(['/', id]);
   }
 
   addNewTemplate() {
