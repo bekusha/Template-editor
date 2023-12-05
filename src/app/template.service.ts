@@ -26,6 +26,7 @@ export class TemplateService {
   }
 
   createTemplate(template: Template): Observable<Template> {
+    console.log("Template Service",template )
     return this.http.post<any>(`${this.apiUrl}/create`, template);
   }
 

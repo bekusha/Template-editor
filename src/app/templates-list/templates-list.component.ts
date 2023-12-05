@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TemplateDialogComponent } from '../template-dialog/template-dialog.component';
 import { Template } from '../model/template.model';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { SharedService } from '../shared.service';
 @Component({
   selector: 'app-templates-list',
   templateUrl: './templates-list.component.html',
@@ -15,10 +16,13 @@ export class TemplatesListComponent implements OnInit {
   filteredTemplates: any[] = [];
   searchTerm: string = '';
 
-  constructor(private router: Router, private templateService: TemplateService, private dialog: MatDialog, private clipboard: Clipboard) {}
+  constructor(private router: Router, private templateService: TemplateService, private dialog: MatDialog, private clipboard: Clipboard, private sharedService: SharedService) {}
 
   ngOnInit(): void {
     this.loadAndFilterTemplates();
+    this.sharedService.templateListUpdated$.subscribe(() => {
+      this.templateService.getAllTemplates();
+    });
   }
 
   copyApiLink(templateId: string){
