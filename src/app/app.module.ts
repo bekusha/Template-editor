@@ -8,19 +8,22 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from './material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TemplatesListComponent } from './templates-list/templates-list.component';
-import { HandlebarsTemplateDetailComponent } from './handlebars-template-detail/handlebars-template-detail.component';
+// import { HandlebarsTemplateDetailComponent } from './handlebars-template-detail/handlebars-template-detail.component';
 import { TemplateDialogComponent } from './template-dialog/template-dialog.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-
-
+import { TemplatePreviewComponent } from './template-preview/template-preview.component';
+import { FormsModule } from '@angular/forms';
+import { SafeHtmlPipe } from './safe-html.pipe';
 @NgModule({
   declarations: [
     AppComponent,
     
     TemplatesListComponent,
-    HandlebarsTemplateDetailComponent,
+    // 
     
     TemplateDialogComponent,
+         TemplatePreviewComponent,
+         SafeHtmlPipe,
     
    
     ],
@@ -32,6 +35,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     RouterModule,
     MaterialModule,
     ReactiveFormsModule,
+    FormsModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

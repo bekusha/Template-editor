@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { TemplateService } from '../template.service';
 import { MatDialog } from '@angular/material/dialog';
 import { TemplateDialogComponent } from '../template-dialog/template-dialog.component';
-
+import { Template } from '../model/template.model';
+import { Clipboard } from '@angular/cdk/clipboard';
 @Component({
   selector: 'app-templates-list',
   templateUrl: './templates-list.component.html',
@@ -13,42 +14,38 @@ export class TemplatesListComponent implements OnInit {
   templates: any[] = [];
   filteredTemplates: any[] = [];
   searchTerm: string = '';
-  
 
-  constructor(private router: Router, private templateService: TemplateService, private dialog: MatDialog) {}
+  constructor(private router: Router, private templateService: TemplateService, private dialog: MatDialog, private clipboard: Clipboard) {}
 
   ngOnInit(): void {
     this.loadAndFilterTemplates();
   }
 
+  copyApiLink(templateId: string){
+    const apiLink = `http://localhost:3000/templates/${templateId}/html`;
+    this.clipboard.copy(apiLink)
+  }
 
   loadAndFilterTemplates() {
     this.templateService.getAllTemplates().subscribe({
-  next: (data) => {
-    this.templates = data;
-    this.filterTemplates();
-  },
-  error: (error) => {
-    console.error('Error loading templates:', error);
-  }
-});
-  
-  }
-
-  editTemplate(id: string) {
-    const templateToEdit = this.templates.find((template) => template._id === id);
-
-    const dialogRef = this.dialog.open(TemplateDialogComponent, {
-      width: '400px',
-      disableClose: true,
-      data: {
-        mode: 'edit',
-        templateData: templateToEdit,
+      next: (data) => {
+        this.templates = data;
+        this.filterTemplates();
       },
+      error: (error) => {
+        console.error('Error loading templates:', error);
+      },
+    });
+  }
+
+  editTemplate(template: Template, id:string): void {
+    const dialogRef = this.dialog.open(TemplateDialogComponent, {
+      data: { template, editMode:true, id }, 
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.loadAndFilterTemplates(); 
+      
+      console.log('The dialog was closed', result);
     });
   }
 
@@ -70,16 +67,16 @@ export class TemplatesListComponent implements OnInit {
 
   addNewTemplate() {
     const dialogRef = this.dialog.open(TemplateDialogComponent, {
-      width: '400px',
+      width: '100%',
       disableClose: true,
-      data: {
-        mode: 'add',
-      },
+      data: { mode: 'add' },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result && result.jsonData !== undefined) {
-        console.log('Dialog result:', result.jsonData);
+      const jsonData = result?.jsonData ?? undefined;
+
+      if (jsonData !== undefined) {
+        console.log('Dialog result:', jsonData);
         this.loadAndFilterTemplates();
       } else {
         console.log('Dialog closed without saving');

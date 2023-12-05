@@ -1,16 +1,31 @@
 <div class="container">
-    <h2>Add New Template</h2>
-    <div>
-      <label for="jsonData">JsonData: </label>
-      <textarea
-        placeholder="{&#10;&nbsp;'name':'Templates name', &#10;&nbsp;'content':'Templates content message',&#10;&nbsp;'firstName':'Firstname',&#10;&nbsp;'lastName':'Lastname', &#10;&nbsp;'phoneNumber':'123456789', &#10;&nbsp;'address':'Address', &#10;&nbsp;'email':'Email@',&#10;}"
-        id="jsonData" [(ngModel)]="jsonData" name="jsonData"
-        rows="10" cols="100" style="width: 90%; padding: 8px;"></textarea>
-    </div>
-    <div class="buttonsGroup">
-    <button mat-raised-button color="primary" (click)="saveTemplate()">Save</button>
-    <button mat-raised-button color="warn" (click)="closeDialog()">Cancel</button>
+  <div class="firstItem">
+  <div>
+    <label for="name">Templates name: </label>
+    <textarea
+      
+      id="name" [(ngModel)]="name" name="name"
+      rows="1" cols="100" style="width: 90%; padding: 8px;"></textarea>
   </div>
-    <div [innerHTML]="safeHtmlData"></div>
+  <div>
+    <label for="htmlSource">HTML Source: </label>
+    <textarea
+      placeholder="Insert your html source..."
+      id="htmlSource" [(ngModel)]="htmlSource" name="htmlSource"
+      rows="10" cols="100" style="width: 90%; padding: 8px;"></textarea>
+      
   </div>
-  
+  <button mat-raised-button color="primary" (click)="saveTemplate(htmlSource, name)">Save Template</button>
+ <div class="jsonField">
+    <label for="jsonData">Json: </label>
+    <textarea
+      placeholder="Insert json data for your template..."
+      id="jsonData" [(ngModel)]="jsonData" name="jsonData"
+      rows="10" cols="100" style="width: 90%; padding: 8px;"></textarea>
+  </div>
+  <div class="buttonsGroup">
+    <button mat-raised-button color="primary" (click)="previewTemplate()">Template Preview</button>
+    <button mat-raised-button color="warn" (click)="closeDialog()">Back</button>
+  </div>
+</div>
+

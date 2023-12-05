@@ -1,11 +1,7 @@
 export interface Template {
-    id?: string;
+    _id?: string;
     name?: string;
-    content?: string;
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    phoneNumber?: number;
-    address?: string;
-  }
+    jsonData?:string;
+    htmlSource?:string;
+}
   

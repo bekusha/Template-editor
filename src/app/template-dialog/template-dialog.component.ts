@@ -1,7 +1,11 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { TemplateService } from '../template.service';
-import {  SafeHtml } from '@angular/platform-browser';
+import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
+import * as Handlebars from 'handlebars';
+import { TemplatePreviewComponent } from '../template-preview/template-preview.component';
+import { Template } from '../model/template.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-template-dialog',
@@ -10,62 +14,88 @@ import {  SafeHtml } from '@angular/platform-browser';
 })
 export class TemplateDialogComponent {
   jsonData: string;
+  htmlSource: string;
   safeHtmlData: SafeHtml;
-  mode: 'add' | 'edit';
+  name: string;
+  template: Template = {};
+  editMode = false;
+  id:string;
 
   constructor(
     public dialogRef: MatDialogRef<TemplateDialogComponent>,
     private templateService: TemplateService,
-    
+    private _sanitizer: DomSanitizer,
+    private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.mode = data.mode;
-
-    if (this.mode === 'edit') {
-      this.jsonData = JSON.stringify(data.templateData, null, 2);
-    } else if (this.mode === 'add') {
-      this.jsonData = '';
-    }
-  }
-
-  saveTemplate() {
-    console.log(this.jsonData)
-    try {
-      const templateData = JSON.parse(this.jsonData);
+    if (data && data.template) {
+      this.editMode = true;
+      this.name = data.template.name;
+      this.jsonData = data.template.jsonData;
+      this.htmlSource = data.template.htmlSource;
+      this.template = { ...data.template }; 
       
-      if (this.mode === 'edit') {
-        this.templateService.updateTemplate(templateData._id, templateData).subscribe({
-          next: (updatedTemplate) => {
-            console.log('Template updated:', updatedTemplate);
-            this.dialogRef.close({ jsonData: updatedTemplate });
-          },
-          error: (error) => {
-            console.error('Error updating template:', error);
-          },
-          complete: () => {
-            console.log('Update template request completed.');
-          },
-        });
-      } else if (this.mode === 'add') {
-        this.templateService.createTemplate(templateData).subscribe({
-          next: (createdTemplate) => {
-            console.log('Template created:', createdTemplate);
-            this.dialogRef.close({ jsonData: createdTemplate });
-          },
-          error: (error) => {
-            console.error('Error creating template:', error);
-          },
-          complete: () => {
-            console.log('Save template request completed.');
-          },
-        });
-      }
-    } catch (error) {
-      console.error('Error parsing JSON data:', error);
     }
   }
+  
+
+  
+
+  saveTemplate(htmlSource: string, name: string) {
+    if (this.editMode) {
+      this.template.name = name;
+      this.template.htmlSource = htmlSource;
+  
+      this.templateService.updateTemplate(this.template).subscribe(
+        (response) => {
+          this.dialogRef.close();
+        },
+        (error) => {
+          console.error('Error updating template:', error);
+        }
+      );
+    } else {
+      this.templateService.createTemplate(this.template).subscribe({
+        next: (createdTemplate) => {
+          console.log('Template created:', createdTemplate);
+            this.dialogRef.close();
+        },
+        error: (error) => {
+          console.error('Error creating template:', error);
+        }
+      });
+    }
+  }
+  
+  
+  
+
+
+ previewTemplate() {
+  const templateData = JSON.parse(this.jsonData);
+  const compiledTemplate = Handlebars.compile(this.htmlSource)(templateData);
+  this.safeHtmlData = this._sanitizer.bypassSecurityTrustHtml(compiledTemplate);
+  const dialogRef = this.dialog.open(TemplatePreviewComponent, {
+    data: { previewHtml: this.safeHtmlData, jsonData: templateData },
+    width: '100%',
+    height: '100%',
+  });
+}
+
 
   closeDialog() {
     this.dialogRef.close();
+  }
+
+  saveName(name: string) {
+    this.name = name;
+  }
+
+  saveHtmlSource() {
+    // Add any additional logic if needed
+  }
+
+  saveJsonData() {
+    // Add any additional logic if needed
   }
 }

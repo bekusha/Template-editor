@@ -11,9 +11,9 @@
    <mat-card class="list" *ngIf="filteredTemplates.includes(template)">
       <h2>{{ template.name }}</h2>
       <div class="buttonsGroup">
-        <button mat-raised-button color="primary" (click)="editTemplate(template._id)">Edit</button>
+        <button mat-raised-button color="primary" (click)="editTemplate(template, template.id)">Edit</button>
         <button mat-raised-button color="warn" (click)="deleteTemplate(template._id)">Delete</button>
-        <button mat-raised-button (click)="viewTemplate(template._id)">View</button>
+        <button mat-raised-button color="primary" (click)="copyApiLink(template._id)">Copy API</button>
       </div>
     </mat-card>
   </div>
