@@ -5,7 +5,7 @@ import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 import * as Handlebars from 'handlebars';
 import { TemplatePreviewComponent } from '../template-preview/template-preview.component';
 import { Template } from '../model/template.model';
-import { SharedService } from '../shared.service';
+
 
 
 @Component({
@@ -27,7 +27,7 @@ export class TemplateDialogComponent implements OnInit{
     private templateService: TemplateService,
     private _sanitizer: DomSanitizer,
     private dialog: MatDialog,
-    private sharedService: SharedService,
+    
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     if (data && data.template) {
@@ -43,10 +43,7 @@ export class TemplateDialogComponent implements OnInit{
 
   ngOnInit(): void {
     this.templateService.getAllTemplates()
-    this.sharedService.templateListUpdated$.subscribe(() => {
-      
-    });
-  }
+   }
 
   
   saveTemplate(htmlSource: string, name: string) {
@@ -57,8 +54,7 @@ export class TemplateDialogComponent implements OnInit{
       this.templateService.updateTemplate(this.template).subscribe(
         (response) => {
           this.dialogRef.close();
-          this.sharedService.triggerTemplateListUpdate();
-        },
+         },
         (error) => {
           console.error('Error updating template:', error);
         }
@@ -70,7 +66,6 @@ export class TemplateDialogComponent implements OnInit{
         next: (createdTemplate) => {
           console.log('Template created:', createdTemplate);
             this.dialogRef.close();
-            this.sharedService.triggerTemplateListUpdate();
         },
         error: (error) => {
           console.error('Error creating template:', error);
